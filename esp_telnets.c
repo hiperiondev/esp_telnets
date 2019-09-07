@@ -79,7 +79,7 @@ struct telnetUserData {
 }
 */
 
-void esp_telnets_sendData(uint8_t *buffer, size_t size) {
+void esp_telnets_send(uint8_t *buffer, size_t size) {
     if (tnHandle != NULL) {
         telnet_send(tnHandle, (char *) buffer, size);
     }

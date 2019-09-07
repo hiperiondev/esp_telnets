@@ -18,5 +18,5 @@
  */
 
 void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), char *ca, char *cert, char *key);
-void esp_telnets_sendData(uint8_t *buffer, size_t size);
+void esp_telnets_send(uint8_t *buffer, size_t size);
  int esp_telnets_vprintf(const char *fmt, va_list va);
