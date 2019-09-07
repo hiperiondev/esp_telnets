@@ -17,6 +17,6 @@
  * Based on: https://github.com/nkolban/esp32-snippets/tree/master/networking/telnet (Neil Kolban <kolban1@kolban.com>)
  */
 
-void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), char *ca, char *cert, char *key);
+void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), char *ca, char *cert, char *key, uint8_t ssl_verify);
 void esp_telnets_send(uint8_t *buffer, size_t size);
  int esp_telnets_vprintf(const char *fmt, va_list va);

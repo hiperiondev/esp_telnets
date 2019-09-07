@@ -174,7 +174,7 @@ static void doTelnet(int partnerSocket) {
     free(pTelnetUserData);
 }
 
-void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), char *ca, char *cert, char *key) {
+void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), char *ca, char *cert, char *key, uint8_t ssl_verify) {
     int ret;
     SSL_CTX* ctx;
     struct sockaddr_in sock_addr;
@@ -213,7 +213,7 @@ void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), cha
     }
 
     ESP_LOGI(TAG, "set verify mode verify peer");
-    SSL_CTX_set_verify(ctx, SSL_VERIFY_NONE, NULL);
+    SSL_CTX_set_verify(ctx, ssl_verify, NULL);
 
     ESP_LOGI(TAG, "create socket");
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
