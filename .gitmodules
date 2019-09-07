@@ -1,0 +1,4 @@
+[submodule "libtelnet"]
+	path = libtelnet
+	url = https://github.com/seanmiddleditch/libtelnet.git
+        ignore = all
