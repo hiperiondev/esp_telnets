@@ -43,41 +43,41 @@ struct telnetUserData {
 
 /*
  static char *eventToString(telnet_event_type_t type) {
- switch (type) {
- case TELNET_EV_COMPRESS:
- return "TELNET_EV_COMPRESS";
- case TELNET_EV_DATA:
- return "TELNET_EV_DATA";
- case TELNET_EV_DO:
- return "TELNET_EV_DO";
- case TELNET_EV_DONT:
- return "TELNET_EV_DONT";
- case TELNET_EV_ENVIRON:
- return "TELNET_EV_ENVIRON";
- case TELNET_EV_ERROR:
- return "TELNET_EV_ERROR";
- case TELNET_EV_IAC:
- return "TELNET_EV_IAC";
- case TELNET_EV_MSSP:
- return "TELNET_EV_MSSP";
- case TELNET_EV_SEND:
- return "TELNET_EV_SEND";
- case TELNET_EV_SUBNEGOTIATION:
- return "TELNET_EV_SUBNEGOTIATION";
- case TELNET_EV_TTYPE:
- return "TELNET_EV_TTYPE";
- case TELNET_EV_WARNING:
- return "TELNET_EV_WARNING";
- case TELNET_EV_WILL:
- return "TELNET_EV_WILL";
- case TELNET_EV_WONT:
- return "TELNET_EV_WONT";
- case TELNET_EV_ZMP:
- return "TELNET_EV_ZMP";
- }
- return "Unknown type";
- }
- */
+    switch (type) {
+    case TELNET_EV_COMPRESS:
+        return "TELNET_EV_COMPRESS";
+    case TELNET_EV_DATA:
+        return "TELNET_EV_DATA";
+    case TELNET_EV_DO:
+        return "TELNET_EV_DO";
+    case TELNET_EV_DONT:
+        return "TELNET_EV_DONT";
+    case TELNET_EV_ENVIRON:
+        return "TELNET_EV_ENVIRON";
+    case TELNET_EV_ERROR:
+        return "TELNET_EV_ERROR";
+    case TELNET_EV_IAC:
+        return "TELNET_EV_IAC";
+    case TELNET_EV_MSSP:
+        return "TELNET_EV_MSSP";
+    case TELNET_EV_SEND:
+        return "TELNET_EV_SEND";
+    case TELNET_EV_SUBNEGOTIATION:
+        return "TELNET_EV_SUBNEGOTIATION";
+    case TELNET_EV_TTYPE:
+        return "TELNET_EV_TTYPE";
+    case TELNET_EV_WARNING:
+        return "TELNET_EV_WARNING";
+    case TELNET_EV_WILL:
+        return "TELNET_EV_WILL";
+    case TELNET_EV_WONT:
+        return "TELNET_EV_WONT";
+    case TELNET_EV_ZMP:
+        return "TELNET_EV_ZMP";
+    }
+    return "Unknown type";
+}
+*/
 
 void esp_telnets_sendData(uint8_t *buffer, size_t size) {
     if (tnHandle != NULL) {
