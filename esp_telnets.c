@@ -33,9 +33,9 @@ static const char *TAG = "esp_telnets";
 #define OPENSSL_SERVER_LOCAL_TCP_PORT 992  // IANA tcp telnets (telnet protocol over TLS/SSL)
 #define OPENSSL_SERVER_RECV_BUF_LEN   2048
 
-static telnet_t *tnHandle;
+     static telnet_t *tnHandle;
 static void (*receivedDataCallback)(uint8_t *buffer, size_t size);
-SSL* ssl;
+       SSL* ssl;
 
 struct telnetUserData {
     int sockfd;
@@ -101,13 +101,11 @@ static void telnetHandler(telnet_t *thisTelnet, telnet_event_t *event, void *use
             ESP_LOGI(TAG, "SSL_write error");
         }
         break;
-
     case TELNET_EV_DATA:
         if (receivedDataCallback != NULL) {
             receivedDataCallback((uint8_t *) event->data.buffer, (size_t) event->data.size);
         }
         break;
-
     default:
         break;
     }
@@ -174,11 +172,18 @@ static void doTelnet(int partnerSocket) {
     free(pTelnetUserData);
 }
 
-void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), char *ca, char *cert, char *key, uint8_t ssl_verify) {
-    int ret;
+void esp_telnets_listen(
+           void (*callbackParam)(uint8_t *buffer, size_t size), //
+          char* ca,                                             //
+          char* cert,                                           //
+          char* key,                                            //
+        uint8_t ssl_verify                                      //
+        ) {
+         int ret;
     SSL_CTX* ctx;
-    struct sockaddr_in sock_addr;
-    int sockfd, new_sockfd;
+      struct sockaddr_in sock_addr;
+         int sockfd, new_sockfd;
+   socklen_t addr_len;
 
     ESP_LOGI(TAG, "create SSL context");
     ctx = SSL_CTX_new(TLS_server_method());
@@ -229,7 +234,6 @@ void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), cha
     sock_addr.sin_port = htons(OPENSSL_SERVER_LOCAL_TCP_PORT);
 
     ret = bind(sockfd, (struct sockaddr* )&sock_addr, sizeof(sock_addr));
-
     if (ret) {
         ESP_LOGI(TAG, "bind failed: %d/%04x", ret, ret);
         goto failed3;
@@ -237,7 +241,6 @@ void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), cha
 
     ESP_LOGI(TAG, "server socket listen");
     ret = listen(sockfd, 32);
-
     if (ret) {
         ESP_LOGI(TAG, "...failed");
         goto failed3;
@@ -246,20 +249,17 @@ void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), cha
     reconnect:
     ESP_LOGI(TAG, "SSL server create");
     ssl = SSL_new(ctx);
-
     if (!ssl) {
         ESP_LOGI(TAG, "...failed");
         goto failed3;
     }
 
-    socklen_t addr_len;
     receivedDataCallback = callbackParam;
 
     ESP_LOGI(TAG, "ssl loop");
     while (1) {
         ESP_LOGI(TAG, "socket accept client");
         new_sockfd = accept(sockfd, (struct sockaddr* )&sock_addr, &addr_len);
-
         if (new_sockfd < 0) {
             ESP_LOGI(TAG, "socket accept client failed");
             goto failed4;
@@ -269,7 +269,6 @@ void esp_telnets_listen(void (*callbackParam)(uint8_t *buffer, size_t size), cha
 
         ESP_LOGI(TAG, "SSL server accept client ......");
         ret = SSL_accept(ssl);
-
         if (!ret) {
             ESP_LOGI(TAG, "SSL server accept client failed");
             goto failed5;
